@@ -37,6 +37,7 @@ end
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -65,6 +66,8 @@ RSpec.configure do |config|
 
    # add `FactoryGirl` methods
   config.include FactoryGirl::Syntax::Methods
+  config.include RequestSpecHelper
+  config.include ControllerSpecHelper
 
   # start by truncating all the tables but then use the faster transaction strategy the rest of the time.
   config.before(:suite) do
