@@ -38,4 +38,8 @@ RSpec.describe 'Users API', type: :request do
       end
     end
   end
+
+
+  describe 'GET /users' do
+  end
 end
