@@ -10,7 +10,7 @@ module ControllerSpecHelper
   end
 
   # return valid headers
-  def valid_headers
+  def valid_headers(user)
     {
       "Authorization" => token_generator(user.id),
       "Content-Type" => "application/json"
@@ -23,5 +23,9 @@ module ControllerSpecHelper
       "Authorization" => nil,
       "Content-Type" => "application/json"
     }
+  end
+
+  def long_string(length) 
+    "0" * length 
   end
 end

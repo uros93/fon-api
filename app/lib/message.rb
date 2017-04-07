@@ -31,4 +31,8 @@ class Message
     "Token expired"
   end
 
+  def self.invalid_parameters
+    "Input parameters are invalid"
+  end
+
 end
