@@ -12,16 +12,16 @@ class WebsitesController < ApplicationController
 		@website = Website.new(website_params)
 		@website.user = @current_user
 		raise ExceptionHandler::InvalidAttribute.new(Message.invalid_parameters) unless @website.save
-		json_response(@website, :created)
+		json_response(@website, :created, include: [:user])
 	end
 
 	def show
-		json_response(@website, :ok)
+		json_response(@website, :ok, include: [:user])
 	end
 
 	def update
 		raise ExceptionHandler::InvalidAttribute.new(Message.invalid_parameters) unless @website.update(website_params) 
-		json_response(@website, :accepted)
+		json_response(@website, :accepted, include: [:user])
 	end
 
 	def destroy
