@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170406101637) do
+ActiveRecord::Schema.define(version: 20170409160708) do
+
+  create_table "rss_links", force: :cascade do |t|
+    t.text     "link"
+    t.string   "name"
+    t.text     "description"
+    t.integer  "website_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["website_id"], name: "index_rss_links_on_website_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
