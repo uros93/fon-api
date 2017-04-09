@@ -3,5 +3,7 @@ Rails.application.routes.draw do
   post 'auth/login', to: 'authentication#authenticate'
   post 'signup', to: 'users#create'
   get 'users/:user_id/websites', to: 'websites#index'
-  resources :websites
+  resources :websites do
+  	resources :rss_links
+  end
 end
