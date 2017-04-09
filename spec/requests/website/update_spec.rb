@@ -20,8 +20,8 @@ RSpec.describe 'PUT /websites/:id' do
 			expect(json_attributes("name")).to eq "N1"
 			expect(json_attributes("description")).to eq "Random description"
 			expect(json_attributes("url")).to eq "https://somerandomurl.com"
-			expect(json_relationship_attribute("user","name")).to eq user.name
-			expect(json_relationship_attribute("user","email")).to eq user.email
+			expect(json_included_relationship_attribute("name")).to eq user.name
+			expect(json_included_relationship_attribute("email")).to eq user.email
 		end
 	end
 	context "when only one attribute is passed" do

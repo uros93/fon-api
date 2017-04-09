@@ -16,7 +16,7 @@ RSpec.describe 'POST /websites' do
 			expect(json_attributes("name")).to eq("Random")
 			expect(json_attributes("url")).to eq("https://random.org")
 			expect(json_attributes("description")).to eq("Some random things")
-			expect(json_relationship_attribute("user","name")).to eq(user.name)
+			expect(json_included_relationship_attribute("name")).to eq(user.name)
 		end
 	end
 

@@ -18,8 +18,8 @@ RSpec.describe 'GET /websites/:id' do
 			expect(json_attributes("name")).to eq webiste.name
 			expect(json_attributes("description")).to eq webiste.description
 			expect(json_attributes("url")).to eq webiste.url
-			expect(json_relationship_attribute("user","name")).to eq user.name
-			expect(json_relationship_attribute("user","email")).to eq user.email
+			expect(json_included_relationship_attribute("name")).to eq user.name
+			expect(json_included_relationship_attribute("email")).to eq user.email
 		end
 	end
 
