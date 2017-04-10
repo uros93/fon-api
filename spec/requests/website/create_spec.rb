@@ -8,7 +8,7 @@ RSpec.describe 'POST /websites' do
 	before {post '/websites', params: valid_attributes, headers: headers}
 
 	context "When request is valid" do 
-		it "returns status 202" do
+		it "returns status 201" do
 			expect(response.status).to eq(201)
 		end
 

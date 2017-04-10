@@ -29,7 +29,7 @@ module RequestSpecHelper
   end
 
   def json_relationship_id(name)
-    json_data['relationships'][name]['data']['id']
+    json_data['relationships'][name]['data']['id'].to_i
   end
 
   def json_included_relationship_attribute(attribute)

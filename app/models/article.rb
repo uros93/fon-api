@@ -1,4 +1,3 @@
 class Article < ActiveModelSerializers::Model
-	derive_attributes_from_names_and_fix_accessors
-  attributes :title, :description, :link, :image
+  attributes :id, :title, :description, :link, :image, :website
 end

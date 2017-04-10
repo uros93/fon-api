@@ -8,7 +8,7 @@ class RssLinkValidator < ActiveModel::Validator
 				url = record.send(options[:fields].first)
 				open(url) do |rss|
 					feed = RSS::Parser.parse(rss, false, false)
-				end
+				end unless Rails.cache.read(url)
 			end
 		rescue Exception => e
 			record.errors[:link] << "RSS link is invalid"

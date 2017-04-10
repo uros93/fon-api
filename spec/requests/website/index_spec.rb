@@ -4,7 +4,6 @@ RSpec.describe 'GET /websites' do
 	let!(:user) { create(:user) }
 	let!(:websites) { create_list(:website, 10, user: user ) }
 	let(:headers) { valid_headers(user) }
-	let(:user_id) {user.id}
 	before { get "/websites", params: {}, headers: headers }
 
 	context "valid user" do 
