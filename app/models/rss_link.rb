@@ -6,4 +6,6 @@ class RssLink < ApplicationRecord
   validates_length_of :description, maximum: 300
   validates_presence_of :link
   validates_with RssLinkValidator, fields: [:link]
+  has_many :category_links, :dependent => :destroy
+  has_many :categories, through: :category_links
 end

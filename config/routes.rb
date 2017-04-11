@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   resources :websites do
   	resources :rss_links
   end
+  resources :categories do
+  end
 end

@@ -10,7 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170409160708) do
+ActiveRecord::Schema.define(version: 20170411110013) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_categories_on_user_id"
+  end
+
+  create_table "categories_rss_links", id: false, force: :cascade do |t|
+    t.integer "category_id", null: false
+    t.integer "rss_link_id", null: false
+    t.index ["category_id", "rss_link_id"], name: "index_categories_rss_links_on_category_id_and_rss_link_id"
+  end
+
+  create_table "category_links", force: :cascade do |t|
+    t.integer  "category_id"
+    t.integer  "rss_link_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["category_id"], name: "index_category_links_on_category_id"
+    t.index ["rss_link_id"], name: "index_category_links_on_rss_link_id"
+  end
 
   create_table "rss_links", force: :cascade do |t|
     t.text     "link"
