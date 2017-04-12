@@ -36,7 +36,7 @@ class WebsitesController < ApplicationController
 	end
 
 	def check_owner
-		raise ExceptionHandler::AuthenticationError unless @website.user == @current_user
+		raise ExceptionHandler::Forbidden unless @website.user == @current_user
 	end
 
 	def website_params

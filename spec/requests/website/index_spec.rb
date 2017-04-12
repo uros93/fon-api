@@ -15,8 +15,8 @@ RSpec.describe 'GET /websites' do
 
 	context "invalid headers" do 
 		let(:headers) {invalid_headers}
-		it "returns 422 status code" do
-			expect(response.status).to eq(422)
+		it "returns 401 status code" do
+			expect(response.status).to eq(401)
 		end
 	end
 

@@ -8,6 +8,11 @@ class UsersController < ApplicationController
     json_response(response, :created)
 	end
 
+  def show
+    @user = User.find(params[:id])
+    json_response(@user, :ok)
+  end
+
   def index
   end
 

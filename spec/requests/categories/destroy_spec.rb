@@ -1,12 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe 'DELETE /websites/:id' do
-
+RSpec.describe 'DELETE /categories/:id' do
 	let!(:user) {create(:user)}
-	let!(:website) {create(:website, user: user)}
+	let!(:category) {create(:category, user: user)}
 	let(:headers) { valid_headers(user) }
-	let(:website_id) {website.id}
-	before { delete "/websites/#{website_id}", params: {}, headers: headers}
+	let(:category_id) {category.id}
+	before { delete "/categories/#{category_id}", params: {}, headers: headers}
 
 	context "when request is valid" do
 		it "returns status 204" do
@@ -14,7 +13,11 @@ RSpec.describe 'DELETE /websites/:id' do
 		end
 
 		it "deletes record" do
-			expect(Website.where(id: website.id)).not_to exist
+			expect(Category.where(id: category.id)).not_to exist
+		end
+
+		it "returns empty body" do
+			expect(response.body).to be_empty
 		end
 	end
 
@@ -26,7 +29,7 @@ RSpec.describe 'DELETE /websites/:id' do
 		end
 	end
 
-	context "when trying to destroy other users website" do
+	context "when trying to destroy other users categories" do
 		let(:second_user) {create(:user, email: "newradnommail@gmial.com", name: "Bob")}
 		let(:headers) { valid_headers(second_user)}
 		it "returns status code 403" do
@@ -35,7 +38,7 @@ RSpec.describe 'DELETE /websites/:id' do
 	end
 
 	context "when record doesnt exist" do
-		let(:website_id) {-1}
+		let(:category_id) {-1}
 		it "returns status 404" do
 			expect(response.status).to eq 404
 		end

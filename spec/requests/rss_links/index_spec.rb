@@ -30,8 +30,8 @@ RSpec.describe 'GET /websites/:website_id/rss_links' do
 		end
 		context "when headers are invlaid" do
 			let(:headers) {invalid_headers}
-			it "returns status 422" do 
-			 	expect(response.status).to eq 422
+			it "returns status 401" do 
+			 	expect(response.status).to eq 401
 			end
 		end
 	end

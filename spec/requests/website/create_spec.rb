@@ -34,8 +34,8 @@ RSpec.describe 'POST /websites' do
 
 		context "when headers are invalid" do
 			let(:headers) {invalid_headers}
-			it "returns status 422" do 
-			 	expect(response.status).to eq 422
+			it "returns status 401" do 
+			 	expect(response.status).to eq 401
 			end
 			it "returns error message" do
 				expect(json["message"]).to eq('Missing token')

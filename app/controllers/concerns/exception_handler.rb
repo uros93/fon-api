@@ -7,15 +7,17 @@ module ExceptionHandler
   class InvalidToken < StandardError; end
   class ExpiredSignature < StandardError; end
   class InvalidAttribute < StandardError; end
+  class Forbidden < StandardError; end
 
   included do
     # Define custom handlers
     rescue_from ActiveRecord::RecordInvalid, with: :four_twenty_two
     rescue_from ExceptionHandler::AuthenticationError, with: :unauthorized_request
-    rescue_from ExceptionHandler::MissingToken, with: :four_twenty_two
-    rescue_from ExceptionHandler::InvalidToken, with: :four_twenty_two
+    rescue_from ExceptionHandler::MissingToken, with: :unauthorized_request
+    rescue_from ExceptionHandler::InvalidToken, with: :unauthorized_request
     rescue_from ExceptionHandler::ExpiredSignature, with: :four_twenty_two
     rescue_from ExceptionHandler::InvalidAttribute, with: :four_twenty_two
+    rescue_from ExceptionHandler::Forbidden, with: :forbidden_request
 
     rescue_from ActiveRecord::RecordNotFound do |e|
       json_response({ message: e.message }, :not_found)
@@ -32,5 +34,9 @@ module ExceptionHandler
   # JSON response with message; Status code 401 - Unauthorized
   def unauthorized_request(e)
     json_response({ message: e.message }, :unauthorized)
+  end
+  # # JSON response with message; Status code 403 - Forbiden
+  def forbidden_request(e)
+    json_response({ message: e.message }, :forbidden)
   end
 end

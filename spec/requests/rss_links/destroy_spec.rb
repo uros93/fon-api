@@ -22,16 +22,16 @@ RSpec.describe 'DELETE /websites/:website_id/rss_links/:id' do
 		
 	context "when headers are invalid" do
 		let(:headers) {invalid_headers}
-		it "returns status code 422" do
-			expect(response.status).to eq 422
+		it "returns status code 401" do
+			expect(response.status).to eq 401
 		end
 	end
 
 	context "when trying to destroy other users link" do
 		let(:second_user) {create(:user, email: "newradnommail@gmial.com", name: "Bob")}
 		let(:headers) { valid_headers(second_user)}
-		it "returns status code 401" do
-			expect(response.status).to eq 401
+		it "returns status code 403" do
+			expect(response.status).to eq 403
 		end
 	end
 

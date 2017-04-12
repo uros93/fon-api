@@ -34,15 +34,15 @@ RSpec.describe 'POST /websites/:website_id/rss_links' do
 		context "when website owner is not request sender" do
 			let(:second_user) {create(:user, email: "newradnommail@gmial.com", name: "Bob")}
 			let(:headers) { valid_headers(second_user)}
-			it "returns status code 401" do
-				expect(response.status).to eq 401
+			it "returns status code 403" do
+				expect(response.status).to eq 403
 			end
 		end
 
 		context "when headers are invlaid" do
 			let(:headers) {invalid_headers}
-			it "returns status 422" do 
-			 	expect(response.status).to eq 422
+			it "returns status 401" do 
+			 	expect(response.status).to eq 401
 			end
 		end
 
