@@ -14,6 +14,18 @@ class UsersController < ApplicationController
   end
 
   def index
+    @users = User.where.not(id: @current_user.id)
+    status = @users.empty? ? :no_content : :ok
+    json_response(@users, status)
+  end
+
+  def update
+    raise ExceptionHandler::InvalidAttribute.new(Message.invalid_parameters) unless @current_user.update(user_params)
+    json_response(@current_user, :accepted)
+  end
+
+  def profile
+    render json: @current_user, status: :ok, serializer: ProfileSerializer
   end
 
 	private
