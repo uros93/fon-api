@@ -1,5 +1,5 @@
 class WebsitesController < ApplicationController
-	before_action :set_website, only: [:show, :update, :destroy]
+	before_action :set_website, only: [:show, :update, :destroy, :articles]
 	before_action :check_owner, only: [:update, :destroy]
 
 	def index
@@ -27,6 +27,12 @@ class WebsitesController < ApplicationController
 	def destroy
 		@website.destroy
 		json_response(nil, :no_content)
+	end
+
+	def articles
+		@articles = RssArticleFetcher::FetchAll.new(@website.rss_links, @website).call
+		status = @articles.empty? ? :no_content : :ok
+		json_response(@articles, status)
 	end
 
 	private

@@ -39,4 +39,14 @@ module RequestSpecHelper
   def json_included_relationship_attribute(attribute)
   	json['included'][0]['attributes'][attribute]
   end
+
+  def parsed_link(url)
+    require 'rss'
+    if Rails.cache.read(url)
+      feed = Rails.cache.read(url)
+    else
+      feed = RSS::Parser.parse(url, false, false)
+    end
+    feed.items
+  end
 end

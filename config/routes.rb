@@ -11,7 +11,13 @@ Rails.application.routes.draw do
   
   resources :websites do
   	resources :rss_links
+    member do
+      get 'articles'
+    end
   end
   resources :categories do
+    member do
+      get 'articles'
+    end
   end
 end
