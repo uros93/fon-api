@@ -30,7 +30,7 @@ class WebsitesController < ApplicationController
 	end
 
 	def articles
-		@articles = RssArticleFetcher::FetchAll.new(@website.rss_links, @website).call
+		@articles = RssArticleFetcher::FetchAll.new(@website.rss_links).call
 		status = @articles.empty? ? :no_content : :ok
 		json_response(@articles, status)
 	end

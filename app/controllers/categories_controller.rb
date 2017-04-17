@@ -28,6 +28,12 @@ class CategoriesController < ApplicationController
 		json_response([], :no_content)
 	end
 
+	def articles
+		@articles = RssArticleFetcher::FetchAll.new(@category.rss_links).call
+		status = @articles.empty? ? :no_content : :ok
+		json_response(@articles, status)
+	end
+
 	private
 
 	def set_category

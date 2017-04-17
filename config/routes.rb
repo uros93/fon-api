@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get 'profile', to: 'users#profile'
   put 'profile/update', to: 'users#update'
 
+  get 'articles', to: 'articles#index'
+
   
   resources :websites do
   	resources :rss_links
